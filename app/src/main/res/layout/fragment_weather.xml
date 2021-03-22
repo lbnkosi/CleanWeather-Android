@@ -13,7 +13,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/material_blue_primary_800">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -31,21 +32,31 @@
                     android:layout_height="match_parent"
                     android:background="@color/white">
 
+                    <View
+                        android:id="@+id/lighthouse"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:background="@color/material_blue_primary_800"
+                        app:layout_constraintHeight_percent="0.5"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
                     <include
                         android:id="@+id/header"
                         layout="@layout/weather_header_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/lighthouse"
+                        app:layout_constraintBottom_toBottomOf="@id/lighthouse"
                         app:weatherDisplay="@{viewModel.weatherDisplay}" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/forecastReyclerView"
                         bindRecyclerViewAdapter="@{viewModel.weatherResult}"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        app:layout_constraintTop_toBottomOf="@id/header"
+                        android:layout_height="0dp"
+                        android:background="@color/material_blue_primary_800"
+                        app:layout_constraintTop_toBottomOf="@id/lighthouse"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         tools:listitem="@layout/weather_forecast_row" />
 

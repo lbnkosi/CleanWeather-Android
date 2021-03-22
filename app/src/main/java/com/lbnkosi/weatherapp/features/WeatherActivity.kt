@@ -41,18 +41,13 @@ class WeatherActivity : BaseActivity(), EasyPermissions.PermissionCallbacks {
         configureLocationPermission()
     }
 
-    private fun replaceFragment(): Boolean {
-        supportFragmentManager.beginTransaction().apply {
-            this.replace(mBinding.frameLayout.id, WeatherFragment())
-            this.commit()
-        }
-        return true
-    }
-
     /**
      * IF DEFAULT_SETTINGS_REQ_CODE : This will call the configureLocationPermission which checks permissions
      * If REQ_CODE_SETTINGS: This will call the configureLocationService which checks for GPS
      */
+
+    //TODO remove deprecated method replace with ->
+    // https://proandroiddev.com/is-onactivityresult-deprecated-in-activity-results-api-lets-deep-dive-into-it-302d5cf6edd
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == AppSettingsDialog.DEFAULT_SETTINGS_REQ_CODE) configureLocationPermission()
@@ -60,7 +55,7 @@ class WeatherActivity : BaseActivity(), EasyPermissions.PermissionCallbacks {
     }
 
     /**
-     * //TODO document this
+     * ? What does this callback do ? We implement it but we don't do anything
      */
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
@@ -68,7 +63,7 @@ class WeatherActivity : BaseActivity(), EasyPermissions.PermissionCallbacks {
     }
 
     /**
-     * //TODO document this
+     * When permissions have been granted we call the configureLocationPermission function
      */
     override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {
         configureLocationPermission()
@@ -83,20 +78,20 @@ class WeatherActivity : BaseActivity(), EasyPermissions.PermissionCallbacks {
     }
 
     /**
-     * If the user turned off the GPS we call the enableGPS function else we resume with retrieving the current location
-     */
-    private fun configureLocationService() {
-        if (!(getSystemService(LOCATION_SERVICE) as LocationManager).isProviderEnabled(LocationManager.GPS_PROVIDER)) enableGps()
-        else retrieveCurrentLocation()
-    }
-
-    /**
      * We check if the user has granted us location permissions. If not we request that they do
      * If location permissions are granted we call the configureLocationService function
      */
     private fun configureLocationPermission() {
         if (EasyPermissions.hasPermissions(this, Manifest.permission.ACCESS_FINE_LOCATION)) configureLocationService()
         else EasyPermissions.requestPermissions(this, getString(R.string.location_required), RC_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION)
+    }
+
+    /**
+     * If the user turned off the GPS we call the enableGPS function else we resume with retrieving the current location
+     */
+    private fun configureLocationService() {
+        if (!(getSystemService(LOCATION_SERVICE) as LocationManager).isProviderEnabled(LocationManager.GPS_PROVIDER)) enableGps()
+        else retrieveCurrentLocation()
     }
 
     /**
@@ -109,7 +104,7 @@ class WeatherActivity : BaseActivity(), EasyPermissions.PermissionCallbacks {
         val cancellationToken = cancellationTokenSource.token
         fusedLocationClient.getCurrentLocation(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY, cancellationToken).addOnSuccessListener {
             mViewModel.setLatLng(LatLng(it.latitude, it.longitude))
-            replaceFragment()
+            replaceFragment(mBinding.frameLayout.id)
         }
     }
 
@@ -117,9 +112,7 @@ class WeatherActivity : BaseActivity(), EasyPermissions.PermissionCallbacks {
      * This function requests a user to enable GPS as without GPS the app cannot work.
      */
     private fun enableGps() {
-        getDialog().showDialog(
-            getString(R.string.gps_not_enabled), getString(R.string.enable_gps),
-            getString(R.string.cancel),
-        ) { _, _ -> startActivityForResult(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS), REQ_CODE_SETTINGS) }
+        getDialog().showDialog(getString(R.string.gps_not_enabled), getString(R.string.enable_gps), getString(R.string.cancel))
+        { _, _ -> startActivityForResult(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS), REQ_CODE_SETTINGS) }
     }
 }

@@ -8,10 +8,8 @@ import androidx.lifecycle.viewModelScope
 import com.dvt.weatherapp.core.models.display.WeatherDisplay
 import com.google.android.gms.maps.model.LatLng
 import com.lbnkosi.domain.usecase.WeatherUseCase
-import com.lbnkosi.weatherapp.R
 import com.lbnkosi.weatherapp.core.commons.Constants.UNIT_METRIC
 import com.lbnkosi.weatherapp.core.extensions.shouldFetch
-import com.lbnkosi.weatherapp.core.extensions.showSnackbar
 import com.lbnkosi.weatherapp.core.mappers.display.WeatherDisplayMapper
 import com.lbnkosi.weatherapp.core.mappers.presenter.toPresenter
 import com.lbnkosi.weatherapp.core.models.presenter.UIWeatherForecast
@@ -40,19 +38,21 @@ class WeatherViewModel @Inject constructor(
     val isLoading: LiveData<Boolean>
         get() = _isLoading
 
-    val weatherDisplay: LiveData<WeatherDisplay?>?
+    val weatherDisplay: LiveData<WeatherDisplay>
         get() = _weatherDisplay
 
-    val weatherResult: LiveData<Resource<UIWeatherForecast>?>?
+    val weatherResult: LiveData<Resource<UIWeatherForecast>>
         get() = _weatherResult
 
     private var _isError: MutableLiveData<Boolean> = MutableLiveData(false)
 
     private var _isLoading: MutableLiveData<Boolean> = MutableLiveData(true)
 
-    private var _weatherDisplay: MutableLiveData<WeatherDisplay?>? = MutableLiveData(WeatherDisplay())
+    private var _fetchResult: Resource<UIWeatherForecast> = Resource.loading(null)
 
-    private var _weatherResult: MutableLiveData<Resource<UIWeatherForecast>?>? = MutableLiveData(Resource.loading(null))
+    private var _weatherDisplay: MutableLiveData<WeatherDisplay> = MutableLiveData(WeatherDisplay())
+
+    private var _weatherResult: MutableLiveData<Resource<UIWeatherForecast>> = MutableLiveData(Resource.loading(null))
 
     private fun getLatLng(): LatLng {
         return LatLng(mLatitude, mLongitude)
@@ -68,25 +68,35 @@ class WeatherViewModel @Inject constructor(
         else -> fetchForecast(aIsOffline = true)
     }
 
-    private fun updateWeatherDisplay(uiWeatherHolder: UIWeatherForecast) {
-        _weatherDisplay?.value = WeatherDisplayMapper().toCurrentWeatherDisplay(uiWeatherHolder.list[0])
+    private fun configureFetchResult(aResource: Resource<UIWeatherForecast>) {
+        _fetchResult = aResource
+        if (_fetchResult.resourceStatus == ResourceStatus.SUCCESS) fetchSuccess()
+        else fetchError()
+    }
+
+    private fun fetchSuccess() {
+        _weatherResult.value = _fetchResult
+        _weatherDisplay.value = WeatherDisplayMapper().toCurrentWeatherDisplay(_fetchResult.data!!.list[0])
+    }
+
+    private fun fetchError() {
+        _weatherResult.value = _fetchResult
+        _isError.value = true
     }
 
     private fun fetchForecast(aIsOffline: Boolean = false) {
-        _isLoading.value = true
-        _isError.value = false
+        initFetch()
         viewModelScope.launch {
             mWeatherUseCase.getWeatherForecast(aIsOffline, mLatitude.toString(), mLongitude.toString(), UNIT_METRIC).collect {
-                if (it.toPresenter().resourceStatus == ResourceStatus.SUCCESS) {
-                    _weatherResult!!.value = it.toPresenter()
-                    updateWeatherDisplay(it.toPresenter().data!!)
-                } else {
-                    _weatherResult!!.value = it.toPresenter()
-                    _isError.value = true
-                }
+                configureFetchResult(it.toPresenter())
             }
             _isLoading.value = false
         }
+    }
+
+    private fun initFetch() {
+        _isLoading.value = true
+        _isError.value = false
     }
 
     init {
