@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Weather Clean Architecture</string>
+    <string name="limited_results">Showing limited results</string>
+    <string name="okay_text">Okay</string>
+    <string name="cancel">Cancel</string>
+
+    <string name="location_required">Location permission required</string>
+
+    <string name="enable_gps">Enable GPS</string>
+    <string name="gps_not_enabled">GPS has not been enabled. To continue using this app, please enable GPS and location services.</string>
+</resources>

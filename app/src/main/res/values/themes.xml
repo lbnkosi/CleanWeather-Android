@@ -1,0 +1,50 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+  <!-- Base application theme. -->
+  <style name="Theme.WeatherCleanArchitecture" parent="Theme.AppCompat.Light.NoActionBar">
+    <!-- Primary brand color. -->
+    <item name="colorPrimary">@color/purple_500</item>
+    <item name="colorPrimaryVariant">@color/purple_700</item>
+    <item name="colorOnPrimary">@color/white</item>
+    <!-- Secondary brand color. -->
+    <item name="colorSecondary">@color/teal_200</item>
+    <item name="colorSecondaryVariant">@color/teal_700</item>
+    <item name="colorOnSecondary">@color/black</item>
+    <!-- Status bar color. -->
+    <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+    <!-- Customize your theme here. -->
+  </style>
+
+  <style name="Title">
+    <item name="android:textColor">@color/gray_1</item>
+    <item name="fontFamily">@font/montserrat_regular</item>
+    <item name="android:textSize">@dimen/text_24</item>
+    <item name="android:gravity">center</item>
+  </style>
+
+  <style name="Title.Medium" parent="Title">
+    <item name="android:textSize">@dimen/text_18</item>
+  </style>
+
+  <style name="WeatherTemperatureStyle">
+    <item name="fontFamily">@font/montserrat_regular</item>
+    <item name="android:textSize">16sp</item>
+    <item name="android:textStyle">bold</item>
+    <item name="android:textColor">@color/white</item>
+  </style>
+
+  <style name="AboutMeDialogTheme" parent="Theme.MaterialComponents.Light.Dialog.Alert">
+    <item name="colorPrimary">@color/material_blue_primary_800</item>
+    <item name="android:background">@drawable/dialog_bg</item>
+    <item name="colorAccent">@color/material_blue_primary_800</item>
+    <item name="android:windowContentOverlay">@null</item>
+    <item name="android:textColorPrimary">@color/black</item>
+    <item name="colorPrimaryDark">@color/material_blue_primary_800</item>
+    <item name="android:buttonStyle">@style/AboutMeCustomDialogButton</item>
+    <item name="android:backgroundDimEnabled">true</item>
+    <item name="android:backgroundDimAmount">0.4</item>
+  </style>
+
+  <style name="AboutMeCustomDialogButton" parent="@android:style/Widget.Holo.Button.Borderless">
+    <item name="android:textColor">@color/material_blue_primary_800</item>
+  </style>
+</resources>
