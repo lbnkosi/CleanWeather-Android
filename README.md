@@ -29,3 +29,10 @@ P.S To get going you’ll have to create an account and obtain an API key.
 * Easy Permissions
 * Glide
 * Gson
+
+## Requirements
+
+* OpenWeatherMap Api Key
+* Android Device - minSdkVersion 23
+* Android Studio
+* Time
