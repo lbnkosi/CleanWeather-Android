@@ -15,12 +15,6 @@ class DialogUtils(aContext: Context) {
 
     private val mDialogBuilder: AlertDialog.Builder = AlertDialog.Builder(aContext, R.style.AboutMeDialogTheme)
 
-    fun showDialog(aMessage: String?) {
-        if (TextUtils.isEmpty(aMessage)) return
-        mDialogBuilder.setMessage(aMessage).setPositiveButton(mResources.getString(R.string.okay_text)) { _, _ -> }
-        mDialogBuilder.show()
-    }
-
     fun showDialog(aMessage: String?, aPositiveActionText: String?, aNegativeActionText: String?, aPositiveOnClickListener: DialogInterface.OnClickListener?) {
         if (TextUtils.isEmpty(aMessage) || aPositiveOnClickListener == null) return
         mDialogBuilder.setMessage(aMessage)

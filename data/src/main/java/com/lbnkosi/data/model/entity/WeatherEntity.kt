@@ -9,9 +9,11 @@ import com.lbnkosi.data.typeconverter.WeatherTypeConverter
 
 @Entity(tableName = "WeatherEntity")
 class WeatherEntity(
+
     @PrimaryKey(autoGenerate = true) var key: Int = 0,
 
     @ColumnInfo(name = "weatherList")
     @TypeConverters(WeatherTypeConverter::class)
     var weatherCache: WeatherCache = WeatherCache(),
+
 )

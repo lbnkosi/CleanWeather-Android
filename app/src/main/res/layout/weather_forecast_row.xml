@@ -6,13 +6,16 @@
 
         <variable
             name="weatherDisplay"
-            type="com.dvt.weatherapp.core.models.display.WeatherDisplay" />
+            type="com.lbnkosi.weatherapp.core.models.display.WeatherDisplay" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/white_rounded_button_10dp">
 
         <TextView
@@ -26,7 +29,7 @@
             android:fontFamily="@font/sharp_sans"
             android:text="@{weatherDisplay.dayOfWeek}"
             android:textColor="@color/black"
-            android:textSize="14sp"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Monday" />
@@ -43,12 +46,25 @@
             app:layout_constraintStart_toStartOf="@id/day"
             app:layout_constraintTop_toBottomOf="@id/day" />
 
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:layout_constraintEnd_toStartOf="@id/temp"
+            app:layout_constraintTop_toTopOf="parent"
+            loadImage="@{weatherDisplay.iconLink}"
+            tools:src="@drawable/ic_baseline_wb_sunny_24"
+            app:layout_constraintWidth_percent="0.1"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
         <TextView
             android:id="@+id/temp"
             style="@style/WeatherTemperatureStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
+            android:textStyle="bold"
+            android:fontFamily="@font/sharp_sans"
             android:text="@{weatherDisplay.currentTemp}"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"

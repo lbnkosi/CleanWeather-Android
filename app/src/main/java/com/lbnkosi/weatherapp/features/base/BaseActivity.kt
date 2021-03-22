@@ -2,7 +2,7 @@ package com.lbnkosi.weatherapp.features.base
 
 import androidx.appcompat.app.AppCompatActivity
 import com.lbnkosi.weatherapp.core.util.DialogUtils
-import com.lbnkosi.weatherapp.features.WeatherFragment
+import com.lbnkosi.weatherapp.features.weather.WeatherFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

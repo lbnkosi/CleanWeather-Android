@@ -1,6 +1,5 @@
 package com.lbnkosi.weatherapp.core.models.presenter
 
-
 data class UICity(
     val coord: UICoord = UICoord(),
     val country: String = "",

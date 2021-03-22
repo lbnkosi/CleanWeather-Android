@@ -2,13 +2,11 @@ package com.lbnkosi.weatherapp.di
 
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.lbnkosi.data.service.WeatherApiService
-import com.lbnkosi.data.utils.LoggingInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
@@ -24,11 +22,15 @@ object RetrofitModule {
 
     @Provides
     @Named(BASE_URL_NAME)
-    fun provideBaseUrl(): String = BASE_URL
+    fun provideBaseUrl(): String {
+        return BASE_URL
+    }
 
     @Singleton
     @Provides
-    fun provideWeatherApi(retrofit: Retrofit) = retrofit.create(WeatherApiService::class.java)!!
+    fun provideWeatherApi(retrofit: Retrofit): WeatherApiService {
+        return retrofit.create(WeatherApiService::class.java)!!
+    }
 
     @Provides
     fun provideOkHttpClient(): OkHttpClient {

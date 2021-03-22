@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.lbnkosi.weatherapp.features.WeatherViewModel" />
+            type="com.lbnkosi.weatherapp.features.weather.WeatherViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,7 +24,7 @@
                 setSwipeToRefreshLoading="@{viewModel.isLoading()}"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                app:layout_constraintHeight_percent="0.4"
+                app:layout_constraintHeight_percent="0.5"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -54,16 +54,26 @@
 
             </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@drawable/rounded_top"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHeight_percent="0.54" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/forecastReyclerView"
                 bindRecyclerViewAdapter="@{viewModel.weatherResult}"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
-                android:background="@color/material_blue_primary_800_opacity_10"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/swipeToRefresh"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/view"
                 tools:listitem="@layout/weather_forecast_row" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

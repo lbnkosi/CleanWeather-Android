@@ -1,4 +1,4 @@
-package com.lbnkosi.weatherapp.core.models.resource
+package com.lbnkosi.weatherapp.core.enums
 
 enum class ResourceStatus {
     SUCCESS,

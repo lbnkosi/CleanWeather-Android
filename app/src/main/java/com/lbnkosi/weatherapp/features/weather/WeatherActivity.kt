@@ -1,4 +1,4 @@
-package com.lbnkosi.weatherapp.features
+package com.lbnkosi.weatherapp.features.weather
 
 import android.Manifest
 import android.annotation.SuppressLint

@@ -90,6 +90,9 @@ dependencies {
 
         //Easy permissions
         implementation(EASY_PERMISSIONS)
+
+        implementation(GLIDE)
+        annotationProcessor(GLIDER_COMPILER)
     }
 
     implementation(project(":data"))

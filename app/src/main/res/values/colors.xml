@@ -20,7 +20,7 @@
   <color name="gray_2">#373737</color>
 
   <color name="material_blue_primary_800">#1565c0</color>
-  <color name="material_blue_primary_800_opacity_10">#071565C0</color>
+  <color name="material_blue_primary_800_opacity_10">#171565C0</color>
   <color name="material_blue_dark_800">#003c8f</color>
   <color name="material_blue_light_800">#5e92f3</color>
 </resources>

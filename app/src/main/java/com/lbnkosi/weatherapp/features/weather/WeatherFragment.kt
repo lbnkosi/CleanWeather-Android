@@ -1,21 +1,13 @@
-package com.lbnkosi.weatherapp.features
+package com.lbnkosi.weatherapp.features.weather
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import com.google.android.gms.maps.model.LatLng
-import com.lbnkosi.weatherapp.R
-import com.lbnkosi.weatherapp.core.extensions.shouldFetch
-import com.lbnkosi.weatherapp.core.extensions.showSnackbar
 import com.lbnkosi.weatherapp.databinding.FragmentWeatherBinding
 import com.lbnkosi.weatherapp.features.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class WeatherFragment : BaseFragment() {

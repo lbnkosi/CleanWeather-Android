@@ -18,7 +18,7 @@
         android:theme="@style/Theme.WeatherCleanArchitecture"
         tools:ignore="AllowBackup">
 
-        <activity android:name=".features.WeatherActivity">
+        <activity android:name=".features.weather.WeatherActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -5,5 +5,10 @@ import com.lbnkosi.domain.model.weather.DMWeatherForecast
 import kotlinx.coroutines.flow.Flow
 
 interface ITWeatherRepository {
-    suspend fun getWeatherForecast(aIsOffline: Boolean, aLat: String, aLon: String, aUnit: String): Flow<DMResource<DMWeatherForecast>>
+    suspend fun getWeatherForecast(
+        aIsOffline: Boolean,
+        aLat: String,
+        aLon: String,
+        aUnit: String
+    ): Flow<DMResource<DMWeatherForecast>>
 }

@@ -1,11 +1,11 @@
-package com.lbnkosi.weatherapp.features
+package com.lbnkosi.weatherapp.features.weather
 
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.dvt.weatherapp.core.models.display.WeatherDisplay
+import com.lbnkosi.weatherapp.core.models.display.WeatherDisplay
 import com.google.android.gms.maps.model.LatLng
 import com.lbnkosi.domain.usecase.WeatherUseCase
 import com.lbnkosi.weatherapp.core.commons.Constants.UNIT_METRIC
@@ -14,7 +14,7 @@ import com.lbnkosi.weatherapp.core.mappers.display.WeatherDisplayMapper
 import com.lbnkosi.weatherapp.core.mappers.presenter.toPresenter
 import com.lbnkosi.weatherapp.core.models.presenter.UIWeatherForecast
 import com.lbnkosi.weatherapp.core.models.resource.Resource
-import com.lbnkosi.weatherapp.core.models.resource.ResourceStatus
+import com.lbnkosi.weatherapp.core.enums.ResourceStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.collect

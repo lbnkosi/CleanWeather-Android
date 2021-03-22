@@ -14,9 +14,17 @@ import kotlinx.coroutines.flow.flow
 import retrofit2.awaitResponse
 import javax.inject.Inject
 
-class WeatherDataSource @Inject constructor(private val mWeatherDao: WeatherDao, private val mWeatherApiService: WeatherApiService) {
+class WeatherDataSource @Inject constructor(
+    private val mWeatherDao: WeatherDao,
+    private val mWeatherApiService: WeatherApiService
+) {
 
-    suspend fun query(aIsOffline: Boolean, aLat: String, aLon: String, aUnit: String): Flow<DTResource<WeatherEntity>> {
+    suspend fun query(
+        aIsOffline: Boolean,
+        aLat: String,
+        aLon: String,
+        aUnit: String
+    ): Flow<DTResource<WeatherEntity>> {
         return when {
             !aIsOffline -> onlineQuery(aLat, aLon, aUnit)
             isCacheAvailable() -> flow { emit(DTResource.success(fetchCache())) }

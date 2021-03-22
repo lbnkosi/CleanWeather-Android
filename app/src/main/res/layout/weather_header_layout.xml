@@ -6,7 +6,7 @@
 
         <variable
             name="weatherDisplay"
-            type="com.dvt.weatherapp.core.models.display.WeatherDisplay" />
+            type="com.lbnkosi.weatherapp.core.models.display.WeatherDisplay" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
