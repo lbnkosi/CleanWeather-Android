@@ -14,3 +14,18 @@ You can have a look at the repository and tell me what you think. Feel free to f
 Repository Link: https://github.com/lbnkosi/CleanWeather-Android
 
 P.S To get going you’ll have to create an account and obtain an API key.
+
+## Languages, libraries and tools used
+
+* [Kotlin](https://kotlinlang.org/)
+* Android Support Libraries
+* [RxJava2](https://github.com/ReactiveX/RxJava/wiki/What's-different-in-2.0)
+* [Dagger 2 (2.11)](https://github.com/google/dagger)
+* [Glide](https://github.com/bumptech/glide)
+* [Retrofit](http://square.github.io/retrofit/)
+* [OkHttp](http://square.github.io/okhttp/)
+* [Gson](https://github.com/google/gson)
+* [Timber](https://github.com/JakeWharton/timber)
+* [Mockito](http://site.mockito.org/)
+* [Espresso](https://developer.android.com/training/testing/espresso/index.html)
+* [Robolectric](http://robolectric.org/)
