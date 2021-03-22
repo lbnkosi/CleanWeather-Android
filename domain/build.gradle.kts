@@ -11,19 +11,18 @@ java {
 
 dependencies {
 
-
     Libs.apply {
-        implementation(KOTLIN_COROUTINES_ANDROID)
+
         implementation(KOTLIN_COROUTINES)
         implementation(KOTLIN_STANDARD_LIB)
+        implementation(KOTLIN_COROUTINES_ANDROID)
 
         //Dagger
-        implementation(DAGGER)
-        implementation(DAGGER_ANDROID)
         kapt(DAGGER_COMPILER)
-        implementation(DAGGER_ANDROID_SUPPORT)
+        implementation(DAGGER)
         kapt(DAGGER_ANDROID_PROCESSOR)
+        implementation(DAGGER_ANDROID)
+        implementation(DAGGER_ANDROID_SUPPORT)
         annotationProcessor(DAGGER_ANDROID_PROCESSOR_ANT)
     }
-    implementation ("org.jetbrains.kotlin:kotlin-stdlib:1.4.31")
 }
