@@ -83,4 +83,9 @@ object Libs {
     const val FIREBASE_BOM = "com.google.firebase:firebase-bom:26.7.0"
     const val FIREBASE_ANALYTICS = "com.google.firebase:firebase-analytics-ktx"
 
+    const val HILT_ANDROID = ("com.google.dagger:hilt-android:2.33-beta")
+    const val HILT_COMPILER = ("com.google.dagger:hilt-compiler:2.33-beta")
+    const val HILT_ANDROID_X_COMPILER = ("androidx.hilt:hilt-compiler:1.0.0-beta01")
+    const val HILT_VIEWMODEL =  ("androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03")
+
 }
