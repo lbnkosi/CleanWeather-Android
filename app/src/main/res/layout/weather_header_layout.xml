@@ -11,7 +11,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        tools:background="@color/material_blue_primary_800">
 
         <TextView
             android:id="@+id/city"
@@ -20,24 +21,24 @@
             android:layout_marginTop="32dp"
             android:fontFamily="@font/sharp_sans"
             android:text="@{weatherDisplay.city}"
-            tools:text="Johannesburg"
             android:textColor="@color/white"
             android:textSize="28sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Johannesburg" />
 
         <TextView
             android:id="@+id/weatherDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_regular"
-            tools:text="Sunny"
             android:text="@{weatherDisplay.weatherType.MCover}"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/city" />
+            app:layout_constraintTop_toBottomOf="@id/city"
+            tools:text="Sunny" />
 
         <TextView
             android:id="@+id/currentTemperature"
@@ -45,17 +46,19 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_regular"
             android:text="@{weatherDisplay.currentTemp}"
-            tools:text="24"
             android:textColor="@color/white"
             android:textSize="60sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/weatherDescription" />
+            app:layout_constraintTop_toBottomOf="@id/weatherDescription"
+            tools:text="24" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
             android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/currentTemperature">
@@ -66,9 +69,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:fontFamily="@font/montserrat_regular"
-                tools:text="H:24"
                 android:text="@{`H:`+weatherDisplay.maximumTemp}"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                tools:text="H:24" />
 
             <TextView
                 android:id="@+id/lowTemp"
@@ -76,9 +79,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:fontFamily="@font/montserrat_regular"
-                tools:text="L:20"
                 android:text="@{`L:`+weatherDisplay.minimumTemp}"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                tools:text="L:20" />
 
         </LinearLayout>
 
