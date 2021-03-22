@@ -1,4 +1,10 @@
 # CleanWeather-Android
+
+### What's left
+
+- [ ] Unit Tests
+- [ ] Make the UI look nice
+
 I’ve had quite a bit of free time on my hands over the long weekend so I decided, for old times sake, why not pull up a list of APIs, pick the best one, and get started on a new Android project...
 
 I developed a simple weather app that can tell you what the weather is today and the forecast for the rest of the week. I used REST APIs from OpenWeatherMap to achieve this which you can check out here, https://openweathermap.org/api.
