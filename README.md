@@ -1,9 +1,11 @@
-# CleanWeather-Android
+# CleanWeather Android
 
 ### What's left
 
 - [ ] Unit Tests
 - [ ] Make the UI look nice
+
+## Hi there
 
 I’ve had quite a bit of free time on my hands over the long weekend so I decided, for old times sake, why not pull up a list of APIs, pick the best one, and get started on a new Android project...
 
