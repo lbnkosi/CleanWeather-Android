@@ -66,6 +66,7 @@ class WeatherDataSource @Inject constructor(
         return mWeatherDao.availableWeather() > 0
     }
 
+    //TODO delete cache if it's older than the last day on the weather forecast
     private suspend fun deleteCache() {
         mWeatherDao.deleteWeatherEntity()
     }
