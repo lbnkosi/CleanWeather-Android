@@ -1,5 +1,9 @@
 # CleanWeather Android
 
+### Important
+
+To run the app you will have to create an app id by visiting https://openweathermap.org/api. Once you have created an app id, place it in the NetworkConstants.kt which can be found in the data module.
+
 ### What's left
 
 - [ ] Unit Tests
@@ -18,11 +22,9 @@ Clean architecture is a software engineering development architecture created by
 
 The app has 3 layers, namely the app, domain, and data layer. The app layer makes use of the Android Framework and is used to create all of our UI components to display inside of the Weather Fragment. The domain layer’s responsibility is to simply contain the UseCase instance used to retrieve data from the Data layer and pass it onto the App layer. And, finally, the Data layer is our access point to external data layers and is used to fetch data from multiple sources (the cache and network in my case).
 
-You can have a look at the repository and tell me what you think. Feel free to fork and play around with it, suggest improvements and collaborate. Side note, I tried to keep the UI as basic as possible.
+You can have a look at the repository and tell me what you think. This repo is by no means perfect, there's likely quite a bit of room for improvement so feel free to fork and play around with it, suggest improvements and collaborate.
 
-Repository Link: https://github.com/lbnkosi/CleanWeather-Android
-
-P.S To get going you’ll have to create an account and obtain an API key.
+Happy coding and stuff!
 
 ## Languages, libraries and tools used
 
