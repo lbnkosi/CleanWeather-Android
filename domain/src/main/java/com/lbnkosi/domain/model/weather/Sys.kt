@@ -1,6 +1,6 @@
-package com.lbnkosi.weatherapp.core.models.presenter
+package com.lbnkosi.domain.model.weather
 
-data class UISys(
+data class Sys(
     val country: String = "",
     val id: Int = 0,
     val message: Double = 0.0,

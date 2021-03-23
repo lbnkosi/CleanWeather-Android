@@ -4,8 +4,8 @@ import android.content.Context
 import com.google.android.gms.maps.model.LatLng
 import com.lbnkosi.weatherapp.core.enums.WeatherTypeEnum
 import com.lbnkosi.weatherapp.core.commons.Constants
-import com.lbnkosi.weatherapp.core.models.presenter.UICurrentWeather
-import com.lbnkosi.weatherapp.core.models.presenter.UIWeather
+import com.lbnkosi.weatherapp.core.models.presenter.CurrentWeather
+import com.lbnkosi.weatherapp.core.models.presenter.Weather
 import com.lbnkosi.weatherapp.core.util.NetworkUtil
 import java8.util.stream.StreamSupport
 import java.text.DateFormat
@@ -37,7 +37,7 @@ fun String.toDate(): String {
     return formatter.format(date)
 }
 
-fun List<UICurrentWeather>.filter(): List<UICurrentWeather> {
+fun List<CurrentWeather>.filter(): List<CurrentWeather> {
     val set: MutableSet<String> = HashSet()
     return StreamSupport.stream(this).filter { element -> set.add(element.dt_txt.toDayOfWeek()) }.collect(java8.util.stream.Collectors.toList())
 }
@@ -50,6 +50,6 @@ fun LatLng.isValid() : Boolean {
     return this.latitude != 0.0 && this.longitude != 0.0
 }
 
-fun List<UIWeather>.icon(): String {
+fun List<Weather>.icon(): String {
     return "http://openweathermap.org/img/w/" + this[0].icon + ".png"
 }

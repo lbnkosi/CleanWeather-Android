@@ -17,16 +17,16 @@ object RoomModule {
 
     @Singleton
     @Provides
-    fun providesWeatherDatabase(@ApplicationContext aContext: Context): AppDatabase {
-        return Room.databaseBuilder(aContext, AppDatabase::class.java, AppDatabase.DATABASE_NAME)
+    fun providesWeatherDatabase(@ApplicationContext context: Context): AppDatabase {
+        return Room.databaseBuilder(context, AppDatabase::class.java, AppDatabase.DATABASE_NAME)
             .fallbackToDestructiveMigration()
             .build()
     }
 
     @Singleton
     @Provides
-    fun providesWeatherDao(aAppDatabase: AppDatabase):WeatherDao {
-        return aAppDatabase.weatherDao()
+    fun providesWeatherDao(database: AppDatabase):WeatherDao {
+        return database.weatherDao()
     }
 
 }

@@ -13,7 +13,7 @@ import com.lbnkosi.weatherapp.core.extensions.shouldFetch
 import com.lbnkosi.weatherapp.core.mappers.display.WeatherDisplayMapper
 import com.lbnkosi.weatherapp.core.mappers.presenter.toPresenter
 import com.lbnkosi.weatherapp.core.models.display.WeatherDisplay
-import com.lbnkosi.weatherapp.core.models.presenter.UIWeatherForecast
+import com.lbnkosi.weatherapp.core.models.presenter.WeatherForecast
 import com.lbnkosi.weatherapp.core.models.resource.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -26,12 +26,12 @@ class WeatherViewModel @Inject constructor(
     //TODO This is used to check the current network state. Figure out a way to do it without a context or find a way to inject context
     // without causing a leak
     @ApplicationContext private val application: Context,
-    private val mWeatherUseCase: WeatherUseCase,
+    private val useCase: WeatherUseCase,
 ) : ViewModel() {
 
-    private var mLatitude: Double = 0.0
+    private var latitude: Double = 0.0
 
-    private var mLongitude: Double = 0.0
+    private var longitude: Double = 0.0
 
     val isError: LiveData<Boolean>
         get() = _isError
@@ -45,28 +45,28 @@ class WeatherViewModel @Inject constructor(
     val weatherDisplay: LiveData<WeatherDisplay>
         get() = _weatherDisplay
 
-    val weatherResult: LiveData<Resource<UIWeatherForecast>>
+    val weatherResult: LiveData<Resource<WeatherForecast>>
         get() = _weatherResult
 
     private var _isError: MutableLiveData<Boolean> = MutableLiveData(false)
 
     private var _isLoading: MutableLiveData<Boolean> = MutableLiveData(true)
 
-    private var _fetchResult: Resource<UIWeatherForecast> = Resource.loading(null)
+    private var _fetchResult: Resource<WeatherForecast> = Resource.loading(null)
 
     private var _headerDisplay: MutableLiveData<WeatherDisplay> = MutableLiveData(WeatherDisplay())
 
     private var _weatherDisplay: MutableLiveData<WeatherDisplay> = MutableLiveData(WeatherDisplay())
 
-    private var _weatherResult: MutableLiveData<Resource<UIWeatherForecast>> = MutableLiveData(Resource.loading(null))
+    private var _weatherResult: MutableLiveData<Resource<WeatherForecast>> = MutableLiveData(Resource.loading(null))
 
     private fun getLatLng(): LatLng {
-        return LatLng(mLatitude, mLongitude)
+        return LatLng(latitude, longitude)
     }
 
     fun setLatLng(aLatLng: LatLng) {
-        mLatitude = aLatLng.latitude
-        mLongitude = aLatLng.longitude
+        latitude = aLatLng.latitude
+        longitude = aLatLng.longitude
     }
 
     fun fetch() = when {
@@ -74,7 +74,7 @@ class WeatherViewModel @Inject constructor(
         else -> fetchForecast(aIsOffline = true)
     }
 
-    private fun configureFetchResult(aResource: Resource<UIWeatherForecast>) {
+    private fun configureFetchResult(aResource: Resource<WeatherForecast>) {
         _fetchResult = aResource
         if (_fetchResult.resourceStatus == ResourceStatus.SUCCESS) fetchSuccess()
         else fetchError()
@@ -94,7 +94,7 @@ class WeatherViewModel @Inject constructor(
     private fun fetchForecast(aIsOffline: Boolean = false) {
         initFetch()
         viewModelScope.launch {
-            mWeatherUseCase.getWeatherForecast(aIsOffline, mLatitude.toString(), mLongitude.toString(), UNIT_METRIC).collect {
+            useCase.getWeatherForecast(aIsOffline, latitude.toString(), longitude.toString(), UNIT_METRIC).collect {
                 configureFetchResult(it.toPresenter())
             }
             _isLoading.value = false

@@ -12,7 +12,7 @@ class WeatherEntity(
 
     @PrimaryKey(autoGenerate = true) var key: Int = 0,
 
-    @ColumnInfo(name = "weatherList")
+    @ColumnInfo(name = "weatherForecast")
     @TypeConverters(WeatherTypeConverter::class)
     var weatherCache: WeatherCache = WeatherCache(),
 

@@ -1,7 +1,6 @@
 package com.lbnkosi.weatherapp.di
 
-import com.lbnkosi.data.repository.WeatherRepository
-import com.lbnkosi.domain.repository.ITWeatherRepository
+import com.lbnkosi.domain.repository.IWeatherRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -14,6 +13,6 @@ abstract class ServiceBindingModule {
 
     @Singleton
     @Binds
-    abstract fun bindWeatherRepository(weatherRepository: WeatherRepository): ITWeatherRepository
+    abstract fun bindWeatherRepository(weatherRepository: IWeatherRepository): IWeatherRepository
 
 }

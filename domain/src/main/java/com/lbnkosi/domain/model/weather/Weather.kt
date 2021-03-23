@@ -1,6 +1,6 @@
 package com.lbnkosi.domain.model.weather
 
-data class DMWeather(
+data class Weather(
     val description: String = "",
     val icon: String = "",
     val id: Int = 0,

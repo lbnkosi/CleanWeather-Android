@@ -1,6 +1,6 @@
 package com.lbnkosi.domain.enums
 
-enum class DMResourceStatus {
+enum class ResourceStatus {
     SUCCESS,
     ERROR,
     LOADING

@@ -1,9 +1,9 @@
 package com.lbnkosi.weatherapp.core.models.presenter
 
-data class UIWeatherForecast(
-    val city: UICity = UICity(),
+data class WeatherForecast(
+    val city: City = City(),
     val cnt: Int = 0,
     val cod: String = "",
-    val list: List<UICurrentWeather> = arrayListOf(),
+    val list: List<CurrentWeather> = arrayListOf(),
     val message: Int = 0
 )

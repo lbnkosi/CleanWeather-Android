@@ -1,6 +1,6 @@
-package com.lbnkosi.weatherapp.core.models.presenter
+package com.lbnkosi.domain.model.weather
 
-data class UIMain(
+data class Main(
     val feels_like: Double = 0.0,
     val humidity: Int = 0,
     val pressure: Int = 0,

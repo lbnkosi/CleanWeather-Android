@@ -1,11 +1,11 @@
 package com.lbnkosi.data.source
 
 import com.lbnkosi.data.db.WeatherDao
-import com.lbnkosi.data.enums.DTResourceStatus
+import com.lbnkosi.data.enums.ResourceStatus
 import com.lbnkosi.data.mappers.toEntity
 import com.lbnkosi.data.model.cache.WeatherCache
 import com.lbnkosi.data.model.entity.WeatherEntity
-import com.lbnkosi.data.model.resource.DTResource
+import com.lbnkosi.data.model.resource.Resource
 import com.lbnkosi.data.model.response.WeatherForecastResponse
 import com.lbnkosi.data.service.WeatherApiService
 import com.lbnkosi.data.utils.NetworkConstants.APP_ID
@@ -15,59 +15,68 @@ import retrofit2.awaitResponse
 import javax.inject.Inject
 
 class WeatherDataSource @Inject constructor(
-    private val mWeatherDao: WeatherDao,
-    private val mWeatherApiService: WeatherApiService
+    private val weatherDao: WeatherDao,
+    private val weatherApiService: WeatherApiService
 ) {
 
     suspend fun query(
-        aIsOffline: Boolean,
-        aLat: String,
-        aLon: String,
-        aUnit: String
-    ): Flow<DTResource<WeatherEntity>> {
+        isOffline: Boolean,
+        latitude: String,
+        longitude: String,
+        units: String
+    ): Flow<Resource<WeatherEntity>> {
         return when {
-            !aIsOffline -> onlineQuery(aLat, aLon, aUnit)
-            isCacheAvailable() -> flow { emit(DTResource.success(fetchCache())) }
-            else -> flow { emit(DTResource.error("Your device is offline and there is no offline data to display. Please make sure you are connected to WiFi to continue", null)) }
+            !isOffline -> onlineQuery(latitude, longitude, units)
+            isCacheAvailable() -> flow { emit(Resource.success(fetchCache())) }
+            else -> flow { emit(Resource.error("Your device is offline and there is no offline data to display. Please make sure you are connected to WiFi to continue", null)) }
         }
     }
 
-    private suspend fun onlineQuery(aLat: String, aLon: String, aUnit: String): Flow<DTResource<WeatherEntity>> {
-        val response = fetchFromApi(aLat, aLon, aUnit)
-        return if (response.DTResourceStatus == DTResourceStatus.SUCCESS) {
-            flow { emit(DTResource.success(saveCache(WeatherCache(weatherForecastResponse = response.data!!).toEntity()))) }
-        } else {
-            if (isCacheAvailable()) {
-                flow { emit(DTResource.success(fetchCache())) }
-            } else {
-                flow { emit(DTResource.error(response.message, null)) }
-            }
+    private suspend fun onlineQuery(
+        latitude: String,
+        longitude: String,
+        units: String
+    ): Flow<Resource<WeatherEntity>> {
+        val response = fetchFromApi(latitude, longitude, units)
+
+        if (response.resourceStatus == ResourceStatus.SUCCESS) {
+            return flow { emit(Resource.success(saveCache(WeatherCache(weatherForecastResponse = response.data!!).toEntity()))) }
+        }
+
+        return when {
+            isCacheAvailable() -> flow { emit(Resource.success(fetchCache())) }
+            else -> flow { emit(Resource.error(response.message, null)) }
         }
     }
 
-    private suspend fun fetchFromApi(aLat: String, aLon: String, aUnit: String): DTResource<WeatherForecastResponse> {
-        val response = mWeatherApiService.getWeatherForecast(aLat, aLon, aUnit, APP_ID).awaitResponse()
+    private suspend fun fetchFromApi(
+        latitude: String,
+        longitude: String,
+        units: String
+    ): Resource<WeatherForecastResponse> {
+        val response = weatherApiService.getWeatherForecast(latitude, longitude, units, APP_ID).awaitResponse()
+
         return when {
-            response.isSuccessful -> DTResource.success(response.body())
-            else -> DTResource.error(response.message(), response.body())
+            response.isSuccessful -> Resource.success(response.body())
+            else -> Resource.error(response.message(), response.body())
         }
     }
 
     private suspend fun saveCache(weatherEntity: WeatherEntity): WeatherEntity {
-        mWeatherDao.saveWeatherEntity(weatherEntity)
-        return mWeatherDao.getWeatherEntity()
+        weatherDao.saveWeatherEntity(weatherEntity)
+        return weatherDao.getWeatherEntity()
     }
 
     private suspend fun fetchCache(): WeatherEntity {
-        return mWeatherDao.getWeatherEntity()
+        return weatherDao.getWeatherEntity()
     }
 
     private suspend fun isCacheAvailable(): Boolean {
-        return mWeatherDao.availableWeather() > 0
+        return weatherDao.availableWeather() > 0
     }
 
     //TODO delete cache if it's older than the last day on the weather forecast
     private suspend fun deleteCache() {
-        mWeatherDao.deleteWeatherEntity()
+        weatherDao.deleteWeatherEntity()
     }
 }

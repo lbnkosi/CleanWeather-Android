@@ -1,33 +1,32 @@
 package com.lbnkosi.weatherapp.core.mappers.presenter
 
-import com.lbnkosi.domain.enums.DMResourceStatus
-import com.lbnkosi.domain.model.resource.DMResource
-import com.lbnkosi.domain.model.weather.DMCity
-import com.lbnkosi.domain.model.weather.DMCurrentWeather
-import com.lbnkosi.domain.model.weather.DMWeatherForecast
+import com.lbnkosi.data.utils.WeatherForecastResource
+import com.lbnkosi.domain.enums.ResourceStatus
+import com.lbnkosi.domain.model.weather.City
+import com.lbnkosi.domain.model.weather.CurrentWeather
 import com.lbnkosi.weatherapp.core.models.presenter.*
 import com.lbnkosi.weatherapp.core.models.resource.Resource
 
-internal fun DMResource<DMWeatherForecast>.toPresenter(): Resource<UIWeatherForecast> {
+internal fun WeatherForecastResource.toPresenter(): Resource<WeatherForecast> {
     return when (this.resourceStatus) {
-        DMResourceStatus.SUCCESS -> Resource.success(this.data!!.toPresenter())
+        ResourceStatus.SUCCESS -> Resource.success(this.data!!.toPresenter())
         else -> Resource.error(this.message!!, null)
     }
 }
 
-internal fun DMWeatherForecast.toPresenter(): UIWeatherForecast {
-    return UIWeatherForecast(
-        toCity(this.city),
+internal fun com.lbnkosi.domain.model.weather.WeatherForecast.toPresenter(): WeatherForecast {
+    return WeatherForecast(
+        toCityPresenter(this.city),
         this.cnt,
         this.cod,
-        toWeatherList(this.list),
+        toPresenterWeatherList(this.list),
         this.message
     )
 }
 
-internal fun toCity(city: DMCity): UICity {
-    return UICity(
-        UICoord(city.coord.lat, city.coord.lon),
+internal fun toCityPresenter(city: City): com.lbnkosi.weatherapp.core.models.presenter.City {
+    return City(
+        Coord(city.coord.lat, city.coord.lon),
         city.country,
         city.id,
         city.name,
@@ -38,25 +37,25 @@ internal fun toCity(city: DMCity): UICity {
     )
 }
 
-internal fun toWeatherList(list: List<DMCurrentWeather>): List<UICurrentWeather> {
+internal fun toPresenterWeatherList(list: List<CurrentWeather>): List<com.lbnkosi.weatherapp.core.models.presenter.CurrentWeather> {
     return list.map {
-        UICurrentWeather(
+        CurrentWeather(
             it.base,
-            UIClouds(it.clouds.all),
+            Clouds(it.clouds.all),
             it.cod,
-            UICoord(it.coord.lat, it.coord.lon),
+            Coord(it.coord.lat, it.coord.lon),
             it.dt,
             it.id,
-            UIMain(it.main.feels_like, it.main.humidity, it.main.pressure, it.main.temp, it.main.temp_max, it.main.temp_min),
+            Main(it.main.feels_like, it.main.humidity, it.main.pressure, it.main.temp, it.main.temp_max, it.main.temp_min),
             it.name,
-            UISys(it.sys.country, it.sys.id, it.sys.message, it.sys.sunrise, it.sys.sunset, it.sys.type),
+            Sys(it.sys.country, it.sys.id, it.sys.message, it.sys.sunrise, it.sys.sunset, it.sys.type),
             it.timezone,
             it.visibility,
-            it.weather.map { w -> UIWeather(w.description, w.icon, w.id, w.main) },
-            UIWind(it.wind.deg, it.wind.speed),
+            it.weather.map { w -> Weather(w.description, w.icon, w.id, w.main) },
+            Wind(it.wind.deg, it.wind.speed),
             it.dt_txt,
             it.pop,
-            UIRain(it.rain.ThreeH)
+            Rain(it.rain.ThreeH)
         )
     }
 }

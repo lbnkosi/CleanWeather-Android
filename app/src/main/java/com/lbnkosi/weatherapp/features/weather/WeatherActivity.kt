@@ -28,15 +28,15 @@ class WeatherActivity : BaseActivity(), EasyPermissions.PermissionCallbacks {
         const val RC_LOCATION = 124
     }
 
-    private lateinit var mBinding: ActivityWeatherBinding
+    private lateinit var binding: ActivityWeatherBinding
 
-    private val mViewModel: WeatherViewModel by viewModels()
+    private val viewModel: WeatherViewModel by viewModels()
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_weather)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_weather)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         configureLocationPermission()
     }
@@ -45,7 +45,6 @@ class WeatherActivity : BaseActivity(), EasyPermissions.PermissionCallbacks {
      * IF DEFAULT_SETTINGS_REQ_CODE : This will call the configureLocationPermission which checks permissions
      * If REQ_CODE_SETTINGS: This will call the configureLocationService which checks for GPS
      */
-
     //TODO remove deprecated method replace with ->
     // https://proandroiddev.com/is-onactivityresult-deprecated-in-activity-results-api-lets-deep-dive-into-it-302d5cf6edd
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -100,11 +99,9 @@ class WeatherActivity : BaseActivity(), EasyPermissions.PermissionCallbacks {
      */
     @SuppressLint("MissingPermission")
     private fun retrieveCurrentLocation() {
-        val cancellationTokenSource = CancellationTokenSource()
-        val cancellationToken = cancellationTokenSource.token
-        fusedLocationClient.getCurrentLocation(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY, cancellationToken).addOnSuccessListener {
-            mViewModel.setLatLng(LatLng(it.latitude, it.longitude))
-            replaceFragment(mBinding.frameLayout.id)
+        fusedLocationClient.getCurrentLocation(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY, CancellationTokenSource().token).addOnSuccessListener {
+            viewModel.setLatLng(LatLng(it.latitude, it.longitude))
+            replaceFragment(binding.frameLayout.id)
         }
     }
 

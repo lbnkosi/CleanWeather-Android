@@ -1,36 +1,37 @@
 package com.lbnkosi.data.mappers
 
-import com.lbnkosi.data.enums.DTResourceStatus.SUCCESS
+import com.lbnkosi.data.enums.ResourceStatus
 import com.lbnkosi.data.model.cache.WeatherCache
 import com.lbnkosi.data.model.entity.WeatherEntity
-import com.lbnkosi.data.model.resource.DTResource
+import com.lbnkosi.data.model.resource.Resource
 import com.lbnkosi.data.model.response.City
 import com.lbnkosi.data.model.response.CurrentWeatherResponse
 import com.lbnkosi.data.model.response.WeatherForecastResponse
-import com.lbnkosi.domain.model.resource.DMResource
+import com.lbnkosi.data.utils.DomainResource
+import com.lbnkosi.data.utils.WeatherForecastResource
 import com.lbnkosi.domain.model.weather.*
 
-internal fun DTResource<WeatherEntity>.toDomain(): DMResource<DMWeatherForecast> {
-    return if (this.DTResourceStatus == SUCCESS) {
-        DMResource.success(responseToDomainWeather(this.data!!.weatherCache.weatherForecastResponse))
+internal fun Resource<WeatherEntity>.toDomain(): WeatherForecastResource {
+    return if (this.resourceStatus == ResourceStatus.SUCCESS) {
+        DomainResource.success(toDomain(data!!.weatherCache.weatherForecastResponse))
     } else {
-        DMResource.error(this.message!!, null)
+        DomainResource.error(this.message!!, null)
     }
 }
 
-fun responseToDomainWeather(response: WeatherForecastResponse): DMWeatherForecast {
-    return DMWeatherForecast(
-        toCity(response.city),
+fun toDomain(response: WeatherForecastResponse): WeatherForecast {
+    return WeatherForecast(
+        toCityDomain(response.city),
         response.cnt,
         response.cod,
-        toWeatherList(response.list),
+        toWeatherListDomain(response.list),
         response.message
     )
 }
 
-fun toCity(city: City): DMCity {
-    return DMCity(
-        DMCoord(city.coord.lat, city.coord.lon),
+fun toCityDomain(city: City): com.lbnkosi.domain.model.weather.City {
+    return City(
+        Coord(city.coord.lat, city.coord.lon),
         city.country,
         city.id,
         city.name,
@@ -41,25 +42,25 @@ fun toCity(city: City): DMCity {
     )
 }
 
-fun toWeatherList(list: List<CurrentWeatherResponse>): List<DMCurrentWeather> {
+fun toWeatherListDomain(list: List<CurrentWeatherResponse>): List<CurrentWeather> {
     return list.map {
-        DMCurrentWeather(
+        CurrentWeather(
             it.base,
-            DMClouds(it.clouds.all),
+            Clouds(it.clouds.all),
             it.cod,
-            DMCoord(it.coord.lat, it.coord.lon),
+            Coord(it.coord.lat, it.coord.lon),
             it.dt,
             it.id,
-            DMMain(it.main.feels_like, it.main.humidity, it.main.pressure, it.main.temp, it.main.temp_max, it.main.temp_min),
+            Main(it.main.feels_like, it.main.humidity, it.main.pressure, it.main.temp, it.main.temp_max, it.main.temp_min),
             it.name,
-            DMSys(it.sys.country, it.sys.id, it.sys.message, it.sys.sunrise, it.sys.sunset, it.sys.type),
+            Sys(it.sys.country, it.sys.id, it.sys.message, it.sys.sunrise, it.sys.sunset, it.sys.type),
             it.timezone,
             it.visibility,
-            it.weather.map { w -> DMWeather(w.description, w.icon, w.id, w.main) },
-            DMWind(it.wind.deg, it.wind.speed),
+            it.weather.map { w -> Weather(w.description, w.icon, w.id, w.main) },
+            Wind(it.wind.deg, it.wind.speed),
             it.dt_txt,
             it.pop,
-            DMRain(it.rain.ThreeH)
+            Rain(it.rain.ThreeH)
         )
     }
 }

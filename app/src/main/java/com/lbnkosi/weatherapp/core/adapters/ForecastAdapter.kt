@@ -6,16 +6,16 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.lbnkosi.weatherapp.core.mappers.display.WeatherDisplayMapper
-import com.lbnkosi.weatherapp.core.models.presenter.UICurrentWeather
+import com.lbnkosi.weatherapp.core.models.presenter.CurrentWeather
 import com.lbnkosi.weatherapp.databinding.WeatherForecastRowBinding
 
-class ForecastAdapter : ListAdapter<UICurrentWeather, ForecastAdapter.WeatherForecastViewHolder>(Companion) {
+class ForecastAdapter : ListAdapter<CurrentWeather, ForecastAdapter.WeatherForecastViewHolder>(Companion) {
 
     class WeatherForecastViewHolder(val binding: WeatherForecastRowBinding) : RecyclerView.ViewHolder(binding.root)
 
-    companion object: DiffUtil.ItemCallback<UICurrentWeather>() {
-        override fun areItemsTheSame(oldItem: UICurrentWeather, newItem: UICurrentWeather): Boolean = oldItem == newItem
-        override fun areContentsTheSame(oldItem: UICurrentWeather, newItem: UICurrentWeather): Boolean = oldItem.id == newItem.id
+    companion object: DiffUtil.ItemCallback<CurrentWeather>() {
+        override fun areItemsTheSame(oldItem: CurrentWeather, newItem: CurrentWeather): Boolean = oldItem == newItem
+        override fun areContentsTheSame(oldItem: CurrentWeather, newItem: CurrentWeather): Boolean = oldItem.id == newItem.id
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WeatherForecastViewHolder {

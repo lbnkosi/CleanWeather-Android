@@ -1,5 +1,5 @@
 package com.lbnkosi.weatherapp.core.models.presenter
 
-data class UIClouds(
-    val all: Int = 0
+data class Rain(
+    val ThreeH: Double = 0.0
 )

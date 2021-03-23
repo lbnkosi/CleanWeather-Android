@@ -7,16 +7,16 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bumptech.glide.Glide
 import com.lbnkosi.weatherapp.core.adapters.ForecastAdapter
 import com.lbnkosi.weatherapp.core.extensions.filter
-import com.lbnkosi.weatherapp.core.models.presenter.UIWeatherForecast
+import com.lbnkosi.weatherapp.core.models.presenter.WeatherForecast
 import com.lbnkosi.weatherapp.core.models.resource.Resource
 
 object BindingAdapters {
 
     @JvmStatic
     @BindingAdapter("loadImage")
-    fun loadImage(aImageView: ImageView, aUrl: String?) {
-        if (!aUrl.isNullOrEmpty()) {
-            Glide.with(aImageView.context).load(aUrl).into(aImageView)
+    fun loadImage(imageView: ImageView, url: String?) {
+        if (!url.isNullOrEmpty()) {
+            Glide.with(imageView.context).load(url).into(imageView)
         }
     }
 
@@ -28,7 +28,7 @@ object BindingAdapters {
 
     @JvmStatic
     @BindingAdapter("bindRecyclerViewAdapter")
-    fun bindRecyclerViewAdapter(recyclerView: RecyclerView, response: Resource<UIWeatherForecast>) {
+    fun bindRecyclerViewAdapter(recyclerView: RecyclerView, response: Resource<WeatherForecast>) {
         recyclerView.adapter = ForecastAdapter()
         (recyclerView.adapter as ForecastAdapter).submitList(response.data?.list?.filter())
     }

@@ -12,20 +12,20 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class WeatherFragment : BaseFragment() {
 
-    private lateinit var mBinding: FragmentWeatherBinding
+    private lateinit var binding: FragmentWeatherBinding
 
-    private val mViewModel : WeatherViewModel by activityViewModels()
+    private val viewModel : WeatherViewModel by activityViewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        mBinding = FragmentWeatherBinding.inflate(inflater)
-        return mBinding.root
+        binding = FragmentWeatherBinding.inflate(inflater)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mBinding.swipeToRefresh.setOnRefreshListener(mViewModel::fetch)
-        mBinding.viewModel = mViewModel
-        mBinding.lifecycleOwner = this
-        mViewModel.fetch()
+        binding.swipeToRefresh.setOnRefreshListener(viewModel::fetch)
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
+        viewModel.fetch()
     }
 }

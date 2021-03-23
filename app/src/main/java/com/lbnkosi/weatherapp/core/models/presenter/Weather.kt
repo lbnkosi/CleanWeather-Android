@@ -1,6 +1,6 @@
 package com.lbnkosi.weatherapp.core.models.presenter
 
-data class UIWeather(
+data class Weather(
     val description: String,
     val icon: String,
     val id: Int,

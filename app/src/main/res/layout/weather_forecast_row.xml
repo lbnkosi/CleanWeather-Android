@@ -55,7 +55,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/temp"
             app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/black"
             tools:src="@drawable/ic_baseline_wb_sunny_24" />
 
         <TextView

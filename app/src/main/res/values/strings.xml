@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Weather Clean Architecture</string>
+    <string name="app_name">CleanWeather</string>
     <string name="limited_results">Showing limited results</string>
     <string name="okay_text">Okay</string>
     <string name="cancel">Cancel</string>

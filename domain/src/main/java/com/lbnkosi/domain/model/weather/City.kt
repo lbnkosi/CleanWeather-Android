@@ -1,7 +1,7 @@
 package com.lbnkosi.domain.model.weather
 
-data class DMCity(
-    val coord: DMCoord = DMCoord(),
+data class City(
+    val coord: Coord = Coord(),
     val country: String = "",
     val id: Int = 0,
     val name: String = "",

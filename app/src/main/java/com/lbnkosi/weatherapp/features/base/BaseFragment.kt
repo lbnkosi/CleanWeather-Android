@@ -7,11 +7,11 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 abstract class BaseFragment : Fragment() {
 
-    private var mDialogUtils: DialogUtils? = null
+    private var dialogUtils: DialogUtils? = null
 
     fun getDialog(): DialogUtils {
         return when {
-            mDialogUtils != null -> mDialogUtils!!
+            dialogUtils != null -> dialogUtils!!
             else -> DialogUtils(requireContext())
         }
     }

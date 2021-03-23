@@ -1,22 +1,20 @@
 package com.lbnkosi.domain.usecase
 
-import com.lbnkosi.domain.model.resource.DMResource
-import com.lbnkosi.domain.model.weather.DMWeatherForecast
-import com.lbnkosi.domain.repository.ITWeatherRepository
+import com.lbnkosi.domain.model.resource.Resource
+import com.lbnkosi.domain.model.weather.WeatherForecast
+import com.lbnkosi.domain.repository.IWeatherRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class WeatherUseCase @Inject constructor(
-    private val mWeatherRepository: ITWeatherRepository
+    private val mWeatherRepository: IWeatherRepository
 ) {
-
     suspend fun getWeatherForecast(
-        aIsOffline: Boolean,
-        aLat: String,
-        aLon: String,
-        aUnit: String
-    ): Flow<DMResource<DMWeatherForecast>> {
-        return mWeatherRepository.getWeatherForecast(aIsOffline, aLat, aLon, aUnit)
+        isOffline: Boolean,
+        latitude: String,
+        longitude: String,
+        units: String
+    ): Flow<Resource<WeatherForecast>> {
+        return mWeatherRepository.getWeatherForecast(isOffline, latitude, longitude, units)
     }
-
 }

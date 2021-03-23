@@ -1,20 +1,20 @@
 package com.lbnkosi.weatherapp.core.models.presenter
 
-data class UICurrentWeather(
+data class CurrentWeather(
     val base: String = "",
-    val clouds: UIClouds = UIClouds(),
+    val clouds: Clouds = Clouds(),
     val cod: Int = 0,
-    val coord: UICoord = UICoord(),
+    val coord: Coord = Coord(),
     val dt: Int = 0,
     val id: Int = 0,
-    val main: UIMain = UIMain(),
+    val main: Main = Main(),
     val name: String = "",
-    val sys: UISys = UISys(),
+    val sys: Sys = Sys(),
     val timezone: Int = 0,
     val visibility: Int = 0,
-    val weather: List<UIWeather> = arrayListOf(),
-    val wind: UIWind = UIWind(),
+    val weather: List<Weather> = arrayListOf(),
+    val wind: Wind = Wind(),
     val dt_txt: String = "",
     val pop: Double = 0.0,
-    val rain: UIRain = UIRain(),
+    val rain: Rain = Rain(),
 )

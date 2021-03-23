@@ -3,17 +3,17 @@ package com.lbnkosi.weatherapp.core.mappers.display
 
 import com.lbnkosi.weatherapp.core.extensions.*
 import com.lbnkosi.weatherapp.core.models.display.WeatherDisplay
-import com.lbnkosi.weatherapp.core.models.presenter.UICurrentWeather
-import com.lbnkosi.weatherapp.core.models.presenter.UIWeatherForecast
+import com.lbnkosi.weatherapp.core.models.presenter.CurrentWeather
+import com.lbnkosi.weatherapp.core.models.presenter.WeatherForecast
 import java8.util.function.Function
 
 class WeatherDisplayMapper {
 
-    fun toHeaderDisplay(forecast: UIWeatherForecast): WeatherDisplay = mForecastDisplayMapper.apply(forecast)
+    fun toHeaderDisplay(forecast: WeatherForecast): WeatherDisplay = forecastDisplayMapper.apply(forecast)
 
-    fun toWeatherDisplay(currentWeather: UICurrentWeather?): WeatherDisplay = mCurrentWeatherDisplayMapper.apply(currentWeather)
+    fun toWeatherDisplay(currentWeather: CurrentWeather?): WeatherDisplay = currentWeatherDisplayMapper.apply(currentWeather)
 
-    private val mForecastDisplayMapper = Function<UIWeatherForecast, WeatherDisplay> {
+    private val forecastDisplayMapper = Function<WeatherForecast, WeatherDisplay> {
         WeatherDisplay().apply {
             city = it.city.name
             currentTemp = it.list.filter()[0].main.temp.toUnicode()
@@ -23,7 +23,7 @@ class WeatherDisplayMapper {
         }
     }
 
-    private val mCurrentWeatherDisplayMapper = Function<UICurrentWeather, WeatherDisplay> {
+    private val currentWeatherDisplayMapper = Function<CurrentWeather, WeatherDisplay> {
         WeatherDisplay().apply {
             city = it.name
             currentTemp = it.main.temp.toUnicode()
