@@ -1,27 +1,27 @@
 plugins {
     id("com.android.library")
     id("kotlin-android")
-    id ("kotlin-kapt")
+    id("kotlin-kapt")
 }
 
 android {
-    compileSdkVersion(30)
-    buildToolsVersion("30.0.2")
+    compileSdkVersion(AppConfig.COMPILE_SDK_VERSION)
+    buildToolsVersion(AppConfig.BUILD_TOOLS_VERSION)
 
     defaultConfig {
-        minSdkVersion(23)
-        targetSdkVersion(30)
-        versionCode(1)
-        versionName("1.0")
+        minSdkVersion(AppConfig.MIN_SDK_VERSION)
+        targetSdkVersion(AppConfig.TARGET_SDK_VERSION)
+        versionCode(AppConfig.VERSION_CODE)
+        versionName(AppConfig.VERSION_NAME)
 
-        testInstrumentationRunner("androidx.test.runner.AndroidJUnitRunner")
-        consumerProguardFiles("consumer-rules.pro")
+        testInstrumentationRunner(AppConfig.TEST_INSTRUMENTATION_RUNNER)
+        consumerProguardFiles(AppConfig.CONSUMER_RULES)
     }
 
     buildTypes {
-        getByName("release") {
+        getByName(AppConfig.BUILD_TYPE) {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(getDefaultProguardFile(AppConfig.PROGUARD_FILE), AppConfig.PROGUARD_RULES)
         }
     }
 
@@ -39,27 +39,17 @@ dependencies {
 
     implementation(project(":domain"))
 
-    kapt("com.google.dagger:hilt-compiler:2.33-beta")
-    implementation("com.google.dagger:hilt-android:2.33-beta")
-
     Libs.apply {
         //Retrofit
         implementation(RETROFIT)
         implementation(RETROFIT_CONVERTER_GSON)
         implementation(OKHTTP_LOGGING_INTERCEPTOR)
 
-        //Stream Support
-        implementation(STREAM_SUPPORT)
-
-        //Timber
-        implementation(TIMBER)
-
-    }
-
-    Libs.apply {
-        implementation(KOTLIN_COROUTINES_ANDROID)
+        //Kotlin
+        implementation(ANDROID_CORE)
         implementation(KOTLIN_COROUTINES)
         implementation(KOTLIN_STANDARD_LIB)
+        implementation(KOTLIN_COROUTINES_ANDROID)
 
         //Room
         kapt(ROOM_COMPILER)
@@ -67,13 +57,19 @@ dependencies {
         implementation(ROOM_RUNTIME)
         testImplementation(ROOM_TESTING)
 
-    }
+        //Unit testing
+        testImplementation(JUNIT)
+        androidTestImplementation(ANDROID_TEST_JUNIT)
+        androidTestImplementation(ESPRESSO)
 
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.4.31")
-    implementation("androidx.core:core-ktx:1.3.2")
-    implementation("androidx.appcompat:appcompat:1.2.0")
-    implementation("com.google.android.material:material:1.3.0")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.2")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
+        //Hilt
+        kapt(HILT_COMPILER)
+        implementation(HILT_ANDROID)
+
+        //Stream Support
+        implementation(STREAM_SUPPORT)
+
+        //Timber
+        implementation(TIMBER)
+    }
 }

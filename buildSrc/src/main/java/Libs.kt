@@ -83,9 +83,12 @@ object Libs {
     const val FIREBASE_BOM = "com.google.firebase:firebase-bom:26.7.0"
     const val FIREBASE_ANALYTICS = "com.google.firebase:firebase-analytics-ktx"
 
-    const val HILT_ANDROID = ("com.google.dagger:hilt-android:2.33-beta")
-    const val HILT_COMPILER = ("com.google.dagger:hilt-compiler:2.33-beta")
-    const val HILT_ANDROID_X_COMPILER = ("androidx.hilt:hilt-compiler:1.0.0-beta01")
-    const val HILT_VIEWMODEL =  ("androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03")
+    const val HILT_ANDROID = "com.google.dagger:hilt-android:2.33-beta"
+    const val HILT_COMPILER = "com.google.dagger:hilt-compiler:2.33-beta"
+    const val HILT_ANDROID_X_COMPILER = "androidx.hilt:hilt-compiler:1.0.0-beta01"
+    const val HILT_VIEWMODEL =  "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
 
+    const val GRADLE = "com.android.tools.build:gradle:4.1.3"
+    const val KOTLIN_GRADLE_PLUGIN = "org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.31"
+    const val HILT_GRADLE = "com.google.dagger:hilt-android-gradle-plugin:2.33-beta"
 }

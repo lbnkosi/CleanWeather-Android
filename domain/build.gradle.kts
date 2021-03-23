@@ -1,7 +1,9 @@
 plugins {
-    id ("java-library")
-    id ("kotlin")
-    id("kotlin-kapt")
+    AppConfig.apply {
+        id(JAVA_LIB)
+        id(KOTLIN)
+        id(KOTLIN_KAPT)
+    }
 }
 
 java {
@@ -10,9 +12,9 @@ java {
 }
 
 dependencies {
-
     Libs.apply {
 
+        //Kotlin
         implementation(KOTLIN_COROUTINES)
         implementation(KOTLIN_STANDARD_LIB)
         implementation(KOTLIN_COROUTINES_ANDROID)
