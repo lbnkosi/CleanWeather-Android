@@ -8,6 +8,7 @@ To run the app you will have to create an app id by visiting https://openweather
 
 - [ ] Unit Tests
 - [ ] Make the UI look nice
+- [ ] Add comments to the code
 - [ ] Delete cache if it's older than the last day of the weather forecast
 
 ## Hi there
