@@ -93,6 +93,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="32dp"
+            app:viewModel="@{viewModel}"
             app:isError="@{viewModel.isError()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:message="@{viewModel.weatherResult.message}" />
