@@ -11,7 +11,7 @@ I’ve had quite a bit of free time on my hands over the long weekend so I decid
 
 I developed a simple weather app that can tell you what the weather is today and the forecast for the rest of the week. I used REST APIs from OpenWeatherMap to achieve this which you can check out here, https://openweathermap.org/api.
 
-The app is called CleanWeather. This is because the application was architected using Uncle Bob’s clean architecture approach. It was also developed using Kotlin. Sorry Java lovers :)
+The app is called CleanWeather. This is because the application was architected using Uncle Bob’s clean architecture approach. It was also developed using Kotlin, sorry Java lovers :)
 
 Clean architecture is a software engineering development architecture created by Robert C. Martin or more popularly known as Uncle Bob. The essence of this architecture is the separation of concerns. Of course, clean architecture will not be appropriate for every project, certainly not one of this size, but the idea behind applying this architecture for this mini-project was to create an example that not only I could reference, but other developers as well.
 
