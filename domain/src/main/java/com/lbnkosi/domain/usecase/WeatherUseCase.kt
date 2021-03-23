@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class WeatherUseCase @Inject constructor(
-    private val mWeatherRepository: IWeatherRepository
+    private val repository: IWeatherRepository
 ) {
     suspend fun getWeatherForecast(
         isOffline: Boolean,
@@ -15,6 +15,6 @@ class WeatherUseCase @Inject constructor(
         longitude: String,
         units: String
     ): Flow<Resource<WeatherForecast>> {
-        return mWeatherRepository.getWeatherForecast(isOffline, latitude, longitude, units)
+        return repository.getWeatherForecast(isOffline, latitude, longitude, units)
     }
 }
