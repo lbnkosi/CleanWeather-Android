@@ -4,6 +4,7 @@
 
 - [ ] Unit Tests
 - [ ] Make the UI look nice
+- [ ] Delete cache if it's older than the last day of the weather forecast
 
 ## Hi there
 
