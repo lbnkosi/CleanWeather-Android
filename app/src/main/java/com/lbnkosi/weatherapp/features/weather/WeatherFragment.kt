@@ -26,5 +26,6 @@ class WeatherFragment : BaseFragment() {
         mBinding.swipeToRefresh.setOnRefreshListener(mViewModel::fetch)
         mBinding.viewModel = mViewModel
         mBinding.lifecycleOwner = this
+        mViewModel.fetch()
     }
 }

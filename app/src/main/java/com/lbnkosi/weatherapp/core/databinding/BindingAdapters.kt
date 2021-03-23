@@ -32,5 +32,4 @@ object BindingAdapters {
         recyclerView.adapter = ForecastAdapter()
         (recyclerView.adapter as ForecastAdapter).submitList(response.data?.list?.filter())
     }
-
 }

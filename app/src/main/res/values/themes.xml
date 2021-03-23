@@ -21,8 +21,39 @@
     <item name="android:gravity">center</item>
   </style>
 
+  <style name="Title.White" parent="Title">
+    <item name="android:textColor">@color/white</item>
+    <item name="android:textSize">@dimen/text_32</item>
+  </style>
+
   <style name="Title.Medium" parent="Title">
     <item name="android:textSize">@dimen/text_18</item>
+    <item name="android:textColor">@color/gray_2</item>
+  </style>
+
+  <style name="Title.Medium.Button" parent="Title.Medium">
+    <item name="android:paddingStart">@dimen/margin_32</item>
+    <item name="android:paddingEnd">@dimen/margin_32</item>
+    <item name="android:paddingTop">@dimen/margin_8</item>
+    <item name="android:paddingBottom">@dimen/margin_8</item>
+    <item name="android:background">@drawable/red_rounded_button_10dp</item>
+    <item name="android:textColor">@color/white</item>
+  </style>
+
+  <style name="Title.Sharp" parent="Title">
+    <item name="android:fontFamily">@font/sharp_sans</item>
+    <item name="android:textSize">@dimen/text_36</item>
+    <item name="android:layout_margin">@dimen/margin_16</item>
+    <item name="android:textStyle">bold</item>
+    <item name="android:textColor">@color/black</item>
+  </style>
+
+  <style name="Title.Sharp.Red" parent="Title.Sharp">
+    <item name="android:fontFamily">@font/sharp_sans</item>
+    <item name="android:textSize">@dimen/text_36</item>
+    <item name="android:layout_margin">@dimen/margin_16</item>
+    <item name="android:textStyle">bold</item>
+    <item name="android:textColor">@color/material_red_primary_800</item>
   </style>
 
   <style name="WeatherTemperatureStyle">

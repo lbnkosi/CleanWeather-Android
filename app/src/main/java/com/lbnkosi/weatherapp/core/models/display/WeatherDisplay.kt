@@ -8,6 +8,7 @@ data class WeatherDisplay(
     var maximumTemp: String = "",
     var currentTemp: String = "",
     var dayOfWeek: String = "",
+    var iconLink: String = "",
     var city: String = "",
-    var iconLink: String = ""
+    var date: String = ""
 )

@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.lbnkosi.weatherapp.R
 import com.lbnkosi.weatherapp.core.mappers.display.WeatherDisplayMapper
 import com.lbnkosi.weatherapp.core.models.presenter.UICurrentWeather
 import com.lbnkosi.weatherapp.databinding.WeatherForecastRowBinding
@@ -26,6 +25,6 @@ class ForecastAdapter : ListAdapter<UICurrentWeather, ForecastAdapter.WeatherFor
     }
 
     override fun onBindViewHolder(holder: WeatherForecastViewHolder, position: Int) {
-        holder.binding.weatherDisplay = WeatherDisplayMapper().toCurrentWeatherDisplay(getItem(position))
+        holder.binding.weatherDisplay = WeatherDisplayMapper().toWeatherDisplay(getItem(position))
     }
 }

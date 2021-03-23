@@ -48,7 +48,7 @@
                         android:layout_height="wrap_content"
                         app:layout_constraintBottom_toBottomOf="@id/lighthouse"
                         app:layout_constraintTop_toTopOf="@id/lighthouse"
-                        app:weatherDisplay="@{viewModel.weatherDisplay}" />
+                        app:weatherDisplay="@{viewModel.headerDisplay}" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -92,9 +92,9 @@
             layout="@layout/error_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
             app:isError="@{viewModel.isError()}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             app:message="@{viewModel.weatherResult.message}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

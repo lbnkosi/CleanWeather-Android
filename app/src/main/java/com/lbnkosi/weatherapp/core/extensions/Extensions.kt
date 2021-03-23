@@ -30,6 +30,13 @@ fun String.toDayOfWeek(): String {
     return formatter.format(date)
 }
 
+fun String.toDate(): String {
+    val inputFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH)
+    val date: Date = inputFormat.parse(this)
+    val formatter: DateFormat = SimpleDateFormat("dd-MMMM-yy", Locale.ENGLISH)
+    return formatter.format(date)
+}
+
 fun List<UICurrentWeather>.filter(): List<UICurrentWeather> {
     val set: MutableSet<String> = HashSet()
     return StreamSupport.stream(this).filter { element -> set.add(element.dt_txt.toDayOfWeek()) }.collect(java8.util.stream.Collectors.toList())
